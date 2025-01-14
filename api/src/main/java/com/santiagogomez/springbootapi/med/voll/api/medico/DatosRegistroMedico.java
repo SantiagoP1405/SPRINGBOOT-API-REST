@@ -1,0 +1,10 @@
+package com.santiagogomez.springbootapi.med.voll.api.medico;
+
+public record DatosRegistroMedico(
+    String nombre, 
+    String email,
+    String documento,
+    Especialidad especialidad
+    
+    ) {
+}
