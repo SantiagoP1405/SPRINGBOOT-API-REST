@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor // Lombok genera un constructor con todos los argumentos
 @EqualsAndHashCode(of = "id") // Lombok genera las funciones equals y hashCode
 public class Medico {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +24,11 @@ public class Medico {
     @Embedded
     private Direccion direccion;
 
+    public Medico(DatosRegistroMedico datosRegistroMedico) {
+        this.nombre = datosRegistroMedico.nombre();
+        this.email = datosRegistroMedico.email();
+        this.documento = datosRegistroMedico.documento();
+        this.especialidad = datosRegistroMedico.especialidad();
+        this.direccion = new Direccion(datosRegistroMedico.direccion());
+    }
 }
