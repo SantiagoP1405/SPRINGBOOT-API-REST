@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class MedicoController {
 
     @PostMapping
-    public void registrarMedico(String parametro) {
+    public void registrarMedico(@RequestBody String parametro) {
         System.out.println("El request llega correctamente ♥♠♣B");
         System.out.println(parametro);
     }   
