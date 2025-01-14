@@ -2,6 +2,7 @@ package com.santiagogomez.springbootapi.med.voll.api.medico;
 
 import com.santiagogomez.springbootapi.med.voll.api.direccion.DatosDireccion;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 public record DatosRegistroMedico(
@@ -14,14 +15,19 @@ public record DatosRegistroMedico(
     String email,
 
     @NotBlank
+    String telefono,
+
+    @NotBlank
     @Pattern(regexp = "\\d{4,6}")// Para limitar los dígitos del documento
     String documento,
 
-    @NotBlank
+    @NotNull
     Especialidad especialidad,
 
     @NotNull
+    @Valid
     DatosDireccion direccion
     
     ) {
+
 }
