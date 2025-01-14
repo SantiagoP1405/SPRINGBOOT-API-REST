@@ -1,5 +1,7 @@
 package com.santiagogomez.springbootapi.med.voll.api.controller;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,4 +22,8 @@ public class MedicoController {
     public void registrarMedico(@RequestBody @Valid DatosRegistroMedico datosRegistroMedico) {
         medicoRepository.save(new Medico(datosRegistroMedico));
     }   
+
+    public List<Medico> listadoMedicos() {
+        return medicoRepository.findAll();
+    }
 }

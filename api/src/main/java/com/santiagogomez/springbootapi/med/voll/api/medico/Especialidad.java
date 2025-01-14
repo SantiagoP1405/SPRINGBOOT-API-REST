@@ -4,6 +4,6 @@ public enum Especialidad {
     ORTOPEDIA,
     CARDIOLOGIA,
     GINECOLOGIA,
-    PEDRIATRIA
+    PEDIATRIA
 
 }
