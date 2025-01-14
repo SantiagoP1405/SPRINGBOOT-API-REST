@@ -2,7 +2,9 @@ package com.santiagogomez.springbootapi.med.voll.api.controller;
 
 import java.util.*;
 
+import org.springframework.data.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.medico.DatosListadoMedico;
@@ -24,8 +26,8 @@ public class MedicoController {
         medicoRepository.save(new Medico(datosRegistroMedico));
     }   
 
-    public List<DatosListadoMedico> listadoMedicos() {
-        return medicoRepository.findAll().stream()
-            .map(DatosListadoMedico::new).toList();
+    @GetMapping
+    public Page<DatosListadoMedico> listadoMedicos(Pageable paginacion) {
+        return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
     }
 }
