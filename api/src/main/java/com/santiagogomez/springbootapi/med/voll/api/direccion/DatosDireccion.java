@@ -1,4 +1,4 @@
-package com.santiagogomez.springbootapi.med.voll.api;
+package com.santiagogomez.springbootapi.med.voll.api.direccion;
 
 public record DatosDireccion(
     String calle,
