@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.medico.DatosRegistroMedico;
+import com.santiagogomez.springbootapi.med.voll.api.medico.Medico;
 import com.santiagogomez.springbootapi.med.voll.api.medico.MedicoRepository;
 
 @RestController
@@ -15,6 +16,6 @@ public class MedicoController {
 
     @PostMapping
     public void registrarMedico(@RequestBody DatosRegistroMedico datosRegistroMedico) {
-        System.out.println(datosRegistroMedico);
+        medicoRepository.save(new Medico(datosRegistroMedico));
     }   
 }
