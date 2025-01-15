@@ -1,6 +1,6 @@
-package com.santiagogomez.springbootapi.med.voll.api.medico;
+package com.santiagogomez.springbootapi.med.voll.api.domain.medico;
 
-import com.santiagogomez.springbootapi.med.voll.api.direccion.*;
+import com.santiagogomez.springbootapi.med.voll.api.domain.direccion.*;
 
 public record DatosRespuestaMedico(
     Long id,

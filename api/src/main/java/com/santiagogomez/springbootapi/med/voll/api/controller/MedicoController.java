@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.santiagogomez.springbootapi.med.voll.api.direccion.DatosDireccion;
-import com.santiagogomez.springbootapi.med.voll.api.medico.*;
+import com.santiagogomez.springbootapi.med.voll.api.domain.direccion.*;
+import com.santiagogomez.springbootapi.med.voll.api.domain.medico.*;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

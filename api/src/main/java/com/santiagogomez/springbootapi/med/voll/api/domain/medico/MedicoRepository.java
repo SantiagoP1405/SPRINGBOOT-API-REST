@@ -1,4 +1,4 @@
-package com.santiagogomez.springbootapi.med.voll.api.medico;
+package com.santiagogomez.springbootapi.med.voll.api.domain.medico;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
