@@ -1,4 +1,4 @@
-package com.santiagogomez.springbootapi.med.voll.api.infra;
+package com.santiagogomez.springbootapi.med.voll.api.infra.errores;
 
 import org.springframework.http.*;
 import org.springframework.validation.FieldError;
