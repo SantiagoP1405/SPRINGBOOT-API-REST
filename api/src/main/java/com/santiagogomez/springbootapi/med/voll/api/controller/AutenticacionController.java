@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.domain.usuarios.*;
+import com.santiagogomez.springbootapi.med.voll.api.infra.security.DatosJWTToken;
 import com.santiagogomez.springbootapi.med.voll.api.infra.security.TokenService;
 
 import jakarta.validation.Valid;
@@ -24,9 +25,10 @@ public class AutenticacionController {
 
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
-        Authentication authenticationToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
-        authenticationManager.authenticate(authenticationToken);
-        var jwtToken = tokenService.gerarToken();
-        return ResponseEntity.ok(jwtToken);
+        Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
+        authenticationManager.authenticate(authToken);
+        var usuarioAutenticado = authenticationManager.authenticate(authToken);
+        var jwtToken = tokenService.gerarToken((Usuario) usuarioAutenticado.getPrincipal());
+        return ResponseEntity.ok(new DatosJWTToken(jwtToken));
     }
 }
