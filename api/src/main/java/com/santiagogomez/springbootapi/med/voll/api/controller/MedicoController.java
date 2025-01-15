@@ -17,6 +17,7 @@ import com.santiagogomez.springbootapi.med.voll.api.medico.*;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import lombok.experimental.var;
 
 @RestController
 @RequestMapping("/medicos")
@@ -47,18 +48,19 @@ public class MedicoController {
         return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getDocumento(), medico.getEspecialidad(), new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(), medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(), medico.getDireccion().getComplemento())));
     }
 
-   /*@DeleteMapping("/{id}")
-    @Transactional
-    public void eliminarMedico(@PathVariable Long id) {
-        Medico medico = medicoRepository.getReferenceById(id);
-        medicoRepository.delete(medico);
-    }*/
-
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity eliminarMedico(@PathVariable Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.desactivarMedico();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRespuestaMedico> retornarDatosMedico(@PathVariable Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.desactivarMedico();
+        var datosMedico = new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getDocumento(), medico.getEspecialidad(), new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(), medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(), medico.getDireccion().getComplemento()));
+        return ResponseEntity.ok(datosMedico);
     }
 }
