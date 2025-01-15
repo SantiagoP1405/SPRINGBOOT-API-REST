@@ -2,6 +2,8 @@ package com.santiagogomez.springbootapi.med.voll.api.medico;
 
 public record DatosListadoMedico(
 
+    Long id,
+
     String nombre, 
 
     String email,
@@ -14,7 +16,7 @@ public record DatosListadoMedico(
 ) {
 
     public DatosListadoMedico(Medico medico) {
-        this(medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getDocumento(), medico.getEspecialidad());
+        this(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getDocumento(), medico.getEspecialidad());
     }
 } 
 

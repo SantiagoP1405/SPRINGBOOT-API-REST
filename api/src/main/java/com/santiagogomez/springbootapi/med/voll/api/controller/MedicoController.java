@@ -8,12 +8,9 @@ import org.springframework.data.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+import com.santiagogomez.springbootapi.med.voll.api.medico.*;
 
-import com.santiagogomez.springbootapi.med.voll.api.medico.DatosListadoMedico;
-import com.santiagogomez.springbootapi.med.voll.api.medico.DatosRegistroMedico;
-import com.santiagogomez.springbootapi.med.voll.api.medico.Medico;
-import com.santiagogomez.springbootapi.med.voll.api.medico.MedicoRepository;
-
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -29,7 +26,14 @@ public class MedicoController {
     }   
 
     @GetMapping
-    public Page<DatosListadoMedico> listadoMedicos(@PageableDefault(size = 2)Pageable paginacion) {
+    public Page<DatosListadoMedico> listadoMedicos(@PageableDefault()Pageable paginacion) {
         return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void actualizaMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico) {
+        Medico medico = medicoRepository.getReferenceById(datosActualizarMedico.id());
+        medico.actualizarDatos(datosActualizarMedico);
     }
 }
