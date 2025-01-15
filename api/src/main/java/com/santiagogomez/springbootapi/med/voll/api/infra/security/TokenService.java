@@ -40,13 +40,16 @@ public class TokenService {
     }
 
     public String getSubject(String token) {
+        if (token == null) {
+            throw new RuntimeException("Token inválido");
+        }
         DecodedJWT verifier = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             verifier = JWT.require(algorithm)
-            .withIssuer("voll med")
-            .build()
-            .verify(token);
+                .withIssuer("voll med")
+                .build()
+                .verify(token);
         
             verifier.getSubject();
         } 
