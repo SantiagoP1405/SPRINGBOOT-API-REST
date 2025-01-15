@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.domain.usuarios.*;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/login")
 public class AutenticacionController {
@@ -17,7 +19,7 @@ public class AutenticacionController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping
-    public ResponseEntity autenticarUsuario(/*@RequestBody*/ DatosAutenticacionUsuario datosAutenticacionUsuario) {
+    public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
         Authentication token = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
         authenticationManager.authenticate(token);
         return ResponseEntity.ok().build();
