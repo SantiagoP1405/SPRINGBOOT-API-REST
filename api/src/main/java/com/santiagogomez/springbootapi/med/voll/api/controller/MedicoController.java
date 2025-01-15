@@ -2,6 +2,8 @@ package com.santiagogomez.springbootapi.med.voll.api.controller;
 
 import java.util.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +29,7 @@ public class MedicoController {
     }   
 
     @GetMapping
-    public Page<DatosListadoMedico> listadoMedicos(Pageable paginacion) {
+    public Page<DatosListadoMedico> listadoMedicos(@PageableDefault(size = 2)Pageable paginacion) {
         return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
     }
 }
