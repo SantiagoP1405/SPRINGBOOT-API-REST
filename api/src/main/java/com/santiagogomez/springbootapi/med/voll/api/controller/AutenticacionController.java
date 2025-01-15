@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.domain.usuarios.*;
+import com.santiagogomez.springbootapi.med.voll.api.infra.security.TokenService;
 
 import jakarta.validation.Valid;
 
@@ -18,10 +19,14 @@ public class AutenticacionController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
-        Authentication token = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
-        authenticationManager.authenticate(token);
-        return ResponseEntity.ok().build();
+        Authentication authenticationToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
+        authenticationManager.authenticate(authenticationToken);
+        var jwtToken = tokenService.gerarToken();
+        return ResponseEntity.ok(jwtToken);
     }
 }
