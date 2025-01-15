@@ -4,10 +4,13 @@ import java.util.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+
+import com.santiagogomez.springbootapi.med.voll.api.direccion.DatosDireccion;
 import com.santiagogomez.springbootapi.med.voll.api.medico.*;
 
 import jakarta.transaction.Transactional;
@@ -32,9 +35,10 @@ public class MedicoController {
 
     @PutMapping
     @Transactional
-    public void actualizaMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico) {
+    public ResponseEntity actualizaMedico(@RequestBody @Valid DatosActualizarMedico datosActualizarMedico) {
         Medico medico = medicoRepository.getReferenceById(datosActualizarMedico.id());
         medico.actualizarDatos(datosActualizarMedico);
+        return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getTelefono(), medico.getDocumento(), medico.getEspecialidad(), new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(), medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(), medico.getDireccion().getComplemento())));
     }
 
    /*@DeleteMapping("/{id}")
@@ -46,8 +50,9 @@ public class MedicoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarMedico(@PathVariable Long id) {
+    public ResponseEntity eliminarMedico(@PathVariable Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.desactivarMedico();
+        return ResponseEntity.noContent().build();
     }
 }
