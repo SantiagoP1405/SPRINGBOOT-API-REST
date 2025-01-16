@@ -4,8 +4,9 @@ import java.time.*;
 
 import com.santiagogomez.springbootapi.med.voll.api.domain.ValidacionException;
 import com.santiagogomez.springbootapi.med.voll.api.domain.consulta.DatosReservaConsulta;
-
-public class ValidacionFueraHorarioConsultas {
+import org.springframework.stereotype.*;
+@Component
+public class ValidacionFueraHorarioConsultas implements ValidadorDeConsultas{
     public void validar(DatosReservaConsulta datos) {
         var fechaConsulta = datos.fecha();
         var domingo = fechaConsulta.getDayOfWeek().equals(DayOfWeek.SUNDAY); //VER IS ES DOMINGO

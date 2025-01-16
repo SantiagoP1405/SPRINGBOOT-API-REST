@@ -1,9 +1,12 @@
 package com.santiagogomez.springbootapi.med.voll.api.domain.consulta;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.santiagogomez.springbootapi.med.voll.api.domain.ValidacionException;
+import com.santiagogomez.springbootapi.med.voll.api.domain.consulta.validaciones.*;
 import com.santiagogomez.springbootapi.med.voll.api.domain.medico.Medico;
 import com.santiagogomez.springbootapi.med.voll.api.domain.medico.MedicoRepository;
 import com.santiagogomez.springbootapi.med.voll.api.domain.paciente.PacienteRepository;
@@ -20,6 +23,8 @@ public class ReservaDeConsultas {
     @Autowired
     private ConsultaRepository consultaRepository;
     
+    @Autowired
+    private List<ValidadorDeConsultas> validadores;
 
     public void reservar(DatosReservaConsulta datos) {
         if (!pacienteRepository.existsById(datos.idPaciente())) {
@@ -30,9 +35,10 @@ public class ReservaDeConsultas {
             throw new ValidacionException("El medico no existe con ese id");
         }
 
+        validadores.forEach(v -> v.validar(datos)); //SE EJECUTAN TODOS LOS VALIDADORES QUE IMPLEMENTAN LA INTERFAZ
+
         var medico = elegirMedico(datos);
         var paciente = pacienteRepository.findById(datos.idPaciente()).get();
-        
         var consulta = new Consulta(null, medico, paciente, datos.fecha());
         consultaRepository.save(consulta);
     }

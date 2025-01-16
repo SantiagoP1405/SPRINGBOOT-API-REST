@@ -2,10 +2,13 @@ package com.santiagogomez.springbootapi.med.voll.api.domain.consulta.validacione
 
 import java.time.*;
 
+import org.springframework.stereotype.*;
+
 import com.santiagogomez.springbootapi.med.voll.api.domain.ValidacionException;
 import com.santiagogomez.springbootapi.med.voll.api.domain.consulta.*;
 
-public class ValidacionConsultaConAnticipacion {
+@Component
+public class ValidacionConsultaConAnticipacion implements ValidadorDeConsultas{
     public void validar(DatosReservaConsulta datos) {
         var fechaConsulta = datos.fecha();
         var ahora = LocalDateTime.now();

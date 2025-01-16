@@ -3,7 +3,13 @@ package com.santiagogomez.springbootapi.med.voll.api.domain.consulta.validacione
 import com.santiagogomez.springbootapi.med.voll.api.domain.ValidacionException;
 import com.santiagogomez.springbootapi.med.voll.api.domain.consulta.*;
 
-public class ValidacionPacientesSinOtraConsultaElMismoDia {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.*;
+
+@Component
+public class ValidacionPacientesSinOtraConsultaElMismoDia implements ValidadorDeConsultas{
+
+    @Autowired
     private ConsultaRepository consultaRepository;
 
     public void validar(DatosReservaConsulta datos) {
