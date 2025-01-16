@@ -1,5 +1,6 @@
 package com.santiagogomez.springbootapi.med.voll.api.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +16,13 @@ import jakarta.validation.Valid;
 @RequestMapping("consultas")
 public class ConsultaController {
 
+    @Autowired
+    private ReservaDeConsultas reservaDeConsultas;
+
     @PostMapping
     @Transactional
     public ResponseEntity reservar(@RequestBody @Valid DatosReservaConsulta datos) {
-        System.out.println(datos);
+        reservaDeConsultas.reservar(datos);
         return ResponseEntity.ok(new DatosDetalleConsulta(null, null, null, null));
     }
 }
