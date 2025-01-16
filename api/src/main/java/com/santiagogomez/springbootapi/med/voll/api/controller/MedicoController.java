@@ -3,7 +3,6 @@ package com.santiagogomez.springbootapi.med.voll.api.controller;
 import java.net.*;
 import java.util.*;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.*;
@@ -15,12 +14,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.santiagogomez.springbootapi.med.voll.api.domain.direccion.*;
 import com.santiagogomez.springbootapi.med.voll.api.domain.medico.*;
 
+import io.swagger.v3.oas.annotations.security.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.experimental.var;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
