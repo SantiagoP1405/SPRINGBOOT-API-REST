@@ -1,6 +1,6 @@
-package com.santiagogomez.springbootapi.med.voll.api.medico;
+package com.santiagogomez.springbootapi.med.voll.api.domain.medico;
 
-import com.santiagogomez.springbootapi.med.voll.api.direccion.DatosDireccion;
+import com.santiagogomez.springbootapi.med.voll.api.domain.direccion.*;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;

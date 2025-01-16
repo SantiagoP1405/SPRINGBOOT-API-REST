@@ -1,4 +1,4 @@
-package com.santiagogomez.springbootapi.med.voll.api.direccion;
+package com.santiagogomez.springbootapi.med.voll.api.domain.direccion;
 
 import jakarta.validation.constraints.*;
 

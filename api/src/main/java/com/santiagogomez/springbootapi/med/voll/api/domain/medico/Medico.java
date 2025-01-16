@@ -1,7 +1,6 @@
-package com.santiagogomez.springbootapi.med.voll.api.medico;
+package com.santiagogomez.springbootapi.med.voll.api.domain.medico;
 
-import com.santiagogomez.springbootapi.med.voll.api.direccion.Direccion;
-
+import com.santiagogomez.springbootapi.med.voll.api.domain.direccion.*;
 import jakarta.persistence.*;
 import lombok.*;
 
