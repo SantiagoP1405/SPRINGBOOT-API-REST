@@ -31,10 +31,10 @@ public class ReservaDeConsultas {
         }
 
         var medico = elegirMedico(datos);
-                var paciente = pacienteRepository.findById(datos.idPaciente()).get();
+        var paciente = pacienteRepository.findById(datos.idPaciente()).get();
         
-                var consulta = new Consulta(null, medico, paciente, datos.fecha());
-                consultaRepository.save(consulta);
+        var consulta = new Consulta(null, medico, paciente, datos.fecha());
+        consultaRepository.save(consulta);
     }
         
         
