@@ -5,6 +5,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import com.santiagogomez.springbootapi.med.voll.api.domain.ValidacionException;
+
 import jakarta.persistence.*;
 
 @RestControllerAdvice //Actúa como proxy para interceptar llamadas en caso de que suceda una excepción 
@@ -21,6 +23,12 @@ public class TratadorDeErrores {
             .map(DatosErrorValidacion::new).toList();
 
         return ResponseEntity.badRequest().body(errores);
+    }
+
+    @ExceptionHandler(ValidacionException.class) 
+    public ResponseEntity tratarErrorDeValidacion(ValidacionException e){
+
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     private record DatosErrorValidacion(String campo, String mensaje){
