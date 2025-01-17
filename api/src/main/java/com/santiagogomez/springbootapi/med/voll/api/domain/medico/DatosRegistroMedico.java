@@ -6,7 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 public record DatosRegistroMedico(
-    @NotNull 
+    
     @NotBlank
     String nombre, 
 
